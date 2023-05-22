@@ -10,5 +10,5 @@ window.title("Julie's Party Hire")
 #frame
 frame = tkinter.Frame(window)
 frame.pack()
-group_info_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",20))
-group_info_frame.grid(row= 0, column= 0, pady=20, padx=20)
+party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",20))
+party_hire_frame.grid(row= 0, column= 0, pady=20, padx=20)
