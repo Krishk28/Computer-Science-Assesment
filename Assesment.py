@@ -10,8 +10,9 @@ window.title("Julie's Party Hire")
 #frame
 frame = tkinter.Frame(window)
 frame.pack()
-party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",20))
-party_hire_frame.grid(row= 0, column= 0, pady=20, padx=20)
+party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",23))
+party_hire_frame.grid(row= 0, column= 0, pady=15, padx=20, ipady=5)
+
 
 #Labels and headings 
 customer_fullname_label = tkinter.Label(party_hire_frame,text="Customer Full Name")
@@ -50,12 +51,12 @@ for widget in party_hire_frame.winfo_children():
 
 #Submit Button
 button_add= tkinter.Button(frame, text = "Submit Data",command=lambda: add_data())
-button_add.grid(row=3,column = 0)
+button_add.grid(row=2,column = 0)
 
 
 #Delete Button
 button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
-button_delete.grid(row=4,column = 0, pady =4)
+button_delete.grid(row=3,column = 0)
 
 
 #database table frame
@@ -65,6 +66,7 @@ table_frame.pack(pady=10)
 columns = ("Row", "Customer Name", "Receipt Number", "Hired Item", "Amount Hired")
 treeview = ttk.Treeview(table_frame, columns=columns, show="headings")
 treeview.pack(side=tkinter.LEFT)
+
 
 #adjusting column sizes
 treeview.column("Row", width=75)
@@ -126,3 +128,4 @@ def delete():
 
 #loop  
 window.mainloop()
+
