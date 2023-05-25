@@ -83,7 +83,6 @@ for col in columns:
 iid = 1
 
 def add_data():
-    global iid 
     #Information
     Name = Customer_entry.get()
     Receipt = Receipt_entry.get()
@@ -92,30 +91,28 @@ def add_data():
 
     #Check if Name is empty
     if Name == "":
-        tkinter.messagebox.showerror(message="Please enter a name.")
+        messagebox.showerror("Error",message="Please enter a name.")
         return
 
     #Check if Receipt is empty
     if Receipt == "":
-        tkinter.messagebox.showerror(message="Please enter a receipt number.")
+        messagebox.showerror("Error",message="Please enter a receipt number.")
         return
 
     #Check if Item is empty
     if Item == "":
-        tkinter.messagebox.showerror(message="Please enter an item.")
+        messagebox.showerror("Error",message="Please enter an item.")
         return
 
     #Check if Amount is a valid number
     try:
         Amount = int(Amount)
     except ValueError:
-        tkinter.messagebox.showerror(message="Please enter a valid amount.")
+        messagebox.showerror("Error",message="Please enter a valid amount.")
         return
 
     #insert data
-
-        iid = treeview.insert("", "end", text="Item 1")
-
+    global iid 
     treeview.insert("", index="end", iid=iid, values=(iid,Name, Receipt, Item, Amount))
     iid +=1
 
