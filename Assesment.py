@@ -35,8 +35,10 @@ hired_item_entry = tkinter.Entry(party_hire_frame)
 hired_item_label.grid(row=1, column=2)
 hired_item_entry.grid(row=3, column=2)
 
+
 Number_hired_label = tkinter.Label(party_hire_frame, text="Number of Items Hired")
-Number_hired = tkinter.Entry(party_hire_frame)
+Number_hired = ttk.Combobox(party_hire_frame, values = list(range(0, 501)),state="readonly")
+
 
 Number_hired_label.grid (row=1, column=3)
 Number_hired.grid (row=3, column=3)
