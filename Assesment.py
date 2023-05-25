@@ -48,6 +48,17 @@ for widget in party_hire_frame.winfo_children():
     widget.grid_configure(padx=10,pady=3)
 
 
+#Submit Button
+button_add= tkinter.Button(frame, text = "Enter Data",command=lambda: add_data())
+button_add.grid(row=3,column = 0)
+
+#Delete Button
+button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
+button_delete.grid(row=4,column = 0, pady =4)
+
+
+
+
 
 
 
