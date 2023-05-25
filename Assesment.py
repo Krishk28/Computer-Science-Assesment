@@ -28,6 +28,23 @@ Receipt_label_entry = tkinter.Entry(party_hire_frame)
 group_leader_entry.grid(row=3,column=0)
 Receipt_label_entry.grid(row=3,column=1)
 
+#adding the rest of the boxes 
+hired_item_label = tkinter.Label(party_hire_frame, text="Hired Item")
+hired_item_entry = tkinter.Entry(party_hire_frame)
+
+hired_item_label.grid(row=1, column=2)
+hired_item_entry.grid(row=3, column=2)
+
+Number_hired_label = tkinter.Label(party_hire_frame, text="Number of Items Hired")
+Number_hired = tkinter.Entry(party_hire_frame)
+
+Number_hired_label.grid (row=1, column=3)
+Number_hired.grid (row=3, column=3)
+
+    #padding for the tk boxes 
+for widget in party_hire_frame.winfo_children():
+    widget.grid_configure(padx=10,pady=3)
+
 
 
 
