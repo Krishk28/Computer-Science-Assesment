@@ -22,11 +22,11 @@ Receipt_label.grid(row=1,column=1)
 
 #adding entry boxes and spin boxes 
 group_leader_entry = tkinter.Entry(party_hire_frame)
-Receipt_label_entry = tkinter.Entry(party_hire_frame)
+Receipt_entry = tkinter.Entry(party_hire_frame)
 
 #placing said boxes onto frame using grid
 group_leader_entry.grid(row=3,column=0)
-Receipt_label_entry.grid(row=3,column=1)
+Receipt_entry.grid(row=3,column=1)
 
 #adding the rest of the boxes 
 hired_item_label = tkinter.Label(party_hire_frame, text="Hired Item")
@@ -55,6 +55,19 @@ button_add.grid(row=3,column = 0)
 #Delete Button
 button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
 button_delete.grid(row=4,column = 0, pady =4)
+
+
+
+#Defining Data 
+def add_data():
+     #Information
+    Full_Name = customer_fullname_entry.get()
+    Recipt_Number = Receipt_entry.get()
+    Hired_Item = hired_item_entry.get()
+    Staying = Number_hired_combobox.get()
+
+
+
 
 
 
