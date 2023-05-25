@@ -21,11 +21,11 @@ Receipt_label = tkinter.Label(party_hire_frame, text = "Receipt Number")
 Receipt_label.grid(row=1,column=1)
 
 #adding entry boxes and spin boxes 
-group_leader_entry = tkinter.Entry(party_hire_frame)
+Customer_entry = tkinter.Entry(party_hire_frame)
 Receipt_entry = tkinter.Entry(party_hire_frame)
 
 #placing said boxes onto frame using grid
-group_leader_entry.grid(row=3,column=0)
+Customer_entry.grid(row=3,column=0)
 Receipt_entry.grid(row=3,column=1)
 
 #adding the rest of the boxes 
@@ -35,46 +35,93 @@ hired_item_entry = tkinter.Entry(party_hire_frame)
 hired_item_label.grid(row=1, column=2)
 hired_item_entry.grid(row=3, column=2)
 
-
+#combobox
 Number_hired_label = tkinter.Label(party_hire_frame, text="Number of Items Hired")
-Number_hired = ttk.Combobox(party_hire_frame, values = list(range(0, 501)),state="readonly")
-
+Number_hired_combobox = ttk.Combobox(party_hire_frame, values = list(range(0, 501)),state="readonly")
 
 Number_hired_label.grid (row=1, column=3)
-Number_hired.grid (row=3, column=3)
+Number_hired_combobox.grid (row=3, column=3)
 
-    #padding for the tk boxes 
+
+#padding for the tk boxes 
 for widget in party_hire_frame.winfo_children():
     widget.grid_configure(padx=10,pady=3)
 
 
 #Submit Button
-button_add= tkinter.Button(frame, text = "Enter Data",command=lambda: add_data())
+button_add= tkinter.Button(frame, text = "Submit Data",command=lambda: add_data())
 button_add.grid(row=3,column = 0)
+
 
 #Delete Button
 button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
 button_delete.grid(row=4,column = 0, pady =4)
 
 
+#database table frame
+table_frame=tkinter.Frame(window)
+table_frame.pack(pady=10)
+#database columns 
+columns = ("Row", "Customer Name", "Receipt Number", "Hired Item", "Amount Hired")
+treeview = ttk.Treeview(table_frame, columns=columns, show="headings")
+treeview.pack(side=tkinter.LEFT)
 
-#Defining Data 
+#adjusting column sizes
+treeview.column("Row", width=75)
+treeview.column("Customer Name", width=200)
+treeview.column("Receipt Number", width=200)
+treeview.column("Hired Item", width=200)
+treeview.column("Amount Hired", width=200)
+
+#headings 
+for col in columns:
+    treeview.heading(col,text=col)
+
+
+iid = 1
+
 def add_data():
-     #Information
-    Full_Name = customer_fullname_entry.get()
-    Recipt_Number = Receipt_entry.get()
-    Hired_Item = hired_item_entry.get()
-    Staying = Number_hired_combobox.get()
+    global iid 
+    #Information
+    Name = Customer_entry.get()
+    Receipt = Receipt_entry.get()
+    Item = hired_item_entry.get()
+    Amount = Number_hired_combobox.get()
 
+    #Check if Name is empty
+    if Name == "":
+        tkinter.messagebox.showerror(message="Please enter a name.")
+        return
 
+    #Check if Receipt is empty
+    if Receipt == "":
+        tkinter.messagebox.showerror(message="Please enter a receipt number.")
+        return
 
+    #Check if Item is empty
+    if Item == "":
+        tkinter.messagebox.showerror(message="Please enter an item.")
+        return
 
+    #Check if Amount is a valid number
+    try:
+        Amount = int(Amount)
+    except ValueError:
+        tkinter.messagebox.showerror(message="Please enter a valid amount.")
+        return
 
+    #insert data
 
+        iid = treeview.insert("", "end", text="Item 1")
 
+    treeview.insert("", index="end", iid=iid, values=(iid,Name, Receipt, Item, Amount))
+    iid +=1
 
-
-
+#Delete data
+def delete():
+   # Get selected item to Delete
+   selected_item = treeview.selection()[0]
+   treeview.delete(selected_item)
 
 
 #loop  
