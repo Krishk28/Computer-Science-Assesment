@@ -125,6 +125,7 @@ def add_data():
         if Amount < 1 or Amount > 500:
             messagebox.showerror("Error", message="Please enter a value between 1 and 500.")
             return False
+    #Check if amount is a proper integer 
     except ValueError:
         messagebox.showerror("Error", message="Please enter a valid amount.")
         return False
