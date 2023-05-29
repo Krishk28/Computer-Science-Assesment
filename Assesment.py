@@ -38,7 +38,7 @@ hired_item_entry.grid(row=3, column=2)
 
 #adding a combobox
 Number_hired_label = tkinter.Label(party_hire_frame, text="Number of Items Hired")
-Number_hired_combobox = ttk.Combobox(party_hire_frame, values = list(range(0, 501)),state="readonly")
+Number_hired_combobox = ttk.Combobox(party_hire_frame, values = list(range(0, 501)))
 
 Number_hired_label.grid (row=1, column=3)
 Number_hired_combobox.grid (row=3, column=3)
@@ -119,12 +119,18 @@ def add_data():
         messagebox.showerror("Error",message="Please enter an item.")
         return
 
-    #Check if Amount is a valid number
+    # Check if Amount is within the desired range
     try:
         Amount = int(Amount)
+        if Amount < 1 or Amount > 500:
+            messagebox.showerror("Error", message="Please enter a value between 1 and 500.")
+            return False
     except ValueError:
-        messagebox.showerror("Error",message="Please enter a valid amount.")
-        return
+        messagebox.showerror("Error", message="Please enter a valid amount.")
+        return False
+
+    return True
+
 
     #insert data
     global iid 
