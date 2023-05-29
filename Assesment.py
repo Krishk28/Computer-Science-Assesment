@@ -11,7 +11,7 @@ window.title("Julie's Party Hire")
 frame = tkinter.Frame(window)
 frame.pack()
 party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",23))
-party_hire_frame.grid(row= 0, column= 0, pady=15, padx=20, ipady=5)
+party_hire_frame.grid(row= 0, column= 0, pady=15, padx=20, ipady=4)
 
 
 #Labels and headings 
@@ -36,13 +36,12 @@ hired_item_entry = tkinter.Entry(party_hire_frame)
 hired_item_label.grid(row=1, column=2)
 hired_item_entry.grid(row=3, column=2)
 
-#combobox
+#adding a combobox
 Number_hired_label = tkinter.Label(party_hire_frame, text="Number of Items Hired")
 Number_hired_combobox = ttk.Combobox(party_hire_frame, values = list(range(0, 501)),state="readonly")
 
 Number_hired_label.grid (row=1, column=3)
 Number_hired_combobox.grid (row=3, column=3)
-
 
 #padding for the tk boxes 
 for widget in party_hire_frame.winfo_children():
@@ -52,7 +51,6 @@ for widget in party_hire_frame.winfo_children():
 #Submit Button
 button_add= tkinter.Button(frame, text = "Submit Data",command=lambda: add_data())
 button_add.grid(row=2,column = 0)
-
 
 #Delete Button
 button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
@@ -69,7 +67,7 @@ treeview.pack(side=tkinter.LEFT)
 
 
 #adjusting column sizes
-treeview.column("Row", width=75)
+treeview.column("Row", width=60)
 treeview.column("Customer Name", width=200)
 treeview.column("Receipt Number", width=200)
 treeview.column("Hired Item", width=200)
@@ -80,8 +78,18 @@ for col in columns:
     treeview.heading(col,text=col)
 
 
+#Defining iid
 iid = 1
 
+#defining the clear function 
+def clear_entry_boxes():
+    Customer_entry.delete(0, tkinter.END)
+    Receipt_entry.delete(0, tkinter.END)
+    hired_item_entry.delete(0, tkinter.END)
+    Number_hired_combobox.set('')
+
+
+#Defining data to submit it 
 def add_data():
     #Information
     Name = Customer_entry.get()
@@ -99,6 +107,13 @@ def add_data():
         messagebox.showerror("Error",message="Please enter a receipt number.")
         return
 
+    #Check if Receipt Number is a valid number
+    try:
+        Receipt = int(Receipt)
+    except ValueError:
+        messagebox.showerror("Error",message="Please enter a valid Receipt Number.")
+        return
+
     #Check if Item is empty
     if Item == "":
         messagebox.showerror("Error",message="Please enter an item.")
@@ -114,7 +129,12 @@ def add_data():
     #insert data
     global iid 
     treeview.insert("", index="end", iid=iid, values=(iid,Name, Receipt, Item, Amount))
+    #iid will automaticlly increase by one
     iid +=1
+
+    # Clear entry boxes
+    clear_entry_boxes()
+
 
 #Delete data
 def delete():
@@ -125,4 +145,3 @@ def delete():
 
 #loop  
 window.mainloop()
-
