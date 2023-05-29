@@ -46,6 +46,9 @@ Number_hired_combobox.grid (row=3, column=3)
 for widget in party_hire_frame.winfo_children():
     widget.grid_configure(padx=10,pady=5)
 
+for widget in party_hire_frame.winfo_children():
+    sticky=("news") Expand=TRUE
+
 
 #Submit Button
 button_add= tkinter.Button(party_hire_frame, text = "Submit Data",command=lambda: add_data())
@@ -60,13 +63,12 @@ button_delete.grid(row=5,column = 2)
 table_frame=tkinter.Frame(window)
 table_frame.pack(pady=10)
 #database columns 
-columns = ("Row", "Customer Name", "Receipt Number", "Hired Item", "Amount Hired")
+columns = ("Customer Name", "Receipt Number", "Hired Item", "Amount Hired")
 treeview = ttk.Treeview(table_frame, columns=columns, show="headings")
 treeview.pack(side=tkinter.LEFT)
 
 
 #adjusting column sizes
-treeview.column("Row", width=60)
 treeview.column("Customer Name", width=200)
 treeview.column("Receipt Number", width=200)
 treeview.column("Hired Item", width=200)
@@ -77,8 +79,7 @@ for col in columns:
     treeview.heading(col,text=col)
 
 
-#Defining iid
-iid = 1
+
 
 #defining the clear function 
 def clear_entry_boxes():
@@ -90,6 +91,7 @@ def clear_entry_boxes():
 
 #Defining data to submit it 
 def add_data():
+
     #Information
     Name = Customer_entry.get()
     Receipt = Receipt_entry.get()
@@ -98,48 +100,47 @@ def add_data():
 
     #Check if Name is empty
     if Name == "":
-        messagebox.showerror("Error",message="Please enter a name.")
+        messagebox.showwarning("Error",message="Please enter a name.")
         return
 
     #Check if Receipt is empty
     if Receipt == "":
-        messagebox.showerror("Error",message="Please enter a receipt number.")
+        messagebox.showwarning("Error",message="Please enter a receipt number.")
         return
 
     #Check if Receipt Number is a valid number
     try:
         Receipt = int(Receipt)
     except ValueError:
-        messagebox.showerror("Error",message="Please enter a valid Receipt Number.")
+        messagebox.showwarning("Error",message="Please enter a valid Receipt Number.")
         return
 
     #Check if Item is empty
     if Item == "":
-        messagebox.showerror("Error",message="Please enter an item.")
+        messagebox.showwarning("Error",message="Please enter an item.")
         return
 
     # Check if Amount is within the desired range
     try:
         Amount = int(Amount)
         if Amount < 1 or Amount > 500:
-            messagebox.showerror("Error", message="Please enter a value between 1 and 500.")
+            messagebox.showwarning("Error", message="Please enter a value between 1 and 500.")
             return False
     #Check if amount is a proper integer 
     except ValueError:
-        messagebox.showerror("Error", message="Please enter a valid amount.")
+        messagebox.showwarning("Error", message="Please enter a valid amount.")
         return False
 
-    return True
+
+    treeview.insert("", index="end", values=(Name, Receipt, Item, Amount))
+
+    clear_entry_boxes()
+
 
 
     #insert data
-    global iid 
-    treeview.insert("", index="end", iid=iid, values=(iid,Name, Receipt, Item, Amount))
-    #iid will automaticlly increase by one
-    iid +=1
-
     # Clear entry boxes
-    clear_entry_boxes()
+
 
 
 #Delete data
