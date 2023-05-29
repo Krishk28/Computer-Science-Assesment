@@ -13,7 +13,6 @@ frame.pack()
 party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",23))
 party_hire_frame.grid(row= 0, column= 0, pady=15, padx=20, ipady=4)
 
-
 #Labels and headings 
 customer_fullname_label = tkinter.Label(party_hire_frame,text="Customer Full Name")
 customer_fullname_label.grid(row=1,column=0)
@@ -45,16 +44,16 @@ Number_hired_combobox.grid (row=3, column=3)
 
 #padding for the tk boxes 
 for widget in party_hire_frame.winfo_children():
-    widget.grid_configure(padx=10,pady=3)
+    widget.grid_configure(padx=10,pady=5)
 
 
 #Submit Button
-button_add= tkinter.Button(frame, text = "Submit Data",command=lambda: add_data())
-button_add.grid(row=2,column = 0)
+button_add= tkinter.Button(party_hire_frame, text = "Submit Data",command=lambda: add_data())
+button_add.grid(row=5,column = 1)
 
 #Delete Button
-button_delete= tkinter.Button(frame, text = "Delete Data",command=lambda: delete())
-button_delete.grid(row=3,column = 0)
+button_delete= tkinter.Button(party_hire_frame, text = "Delete Data",command=lambda: delete())
+button_delete.grid(row=5,column = 2)
 
 
 #database table frame
