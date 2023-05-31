@@ -46,9 +46,6 @@ Number_hired_combobox.grid (row=3, column=3)
 for widget in party_hire_frame.winfo_children():
     widget.grid_configure(padx=10,pady=5)
 
-for widget in party_hire_frame.winfo_children():
-    sticky=("news") Expand=TRUE
-
 
 #Submit Button
 button_add= tkinter.Button(party_hire_frame, text = "Submit Data",command=lambda: add_data())
@@ -103,6 +100,11 @@ def add_data():
         messagebox.showwarning("Error",message="Please enter a name.")
         return
 
+    # Check if Name contains only alphabets
+    if not Name.isalpha():
+        messagebox.showwarning("Error", message="Please enter a valid name using letters only.")
+        return
+
     #Check if Receipt is empty
     if Receipt == "":
         messagebox.showwarning("Error",message="Please enter a receipt number.")
@@ -131,15 +133,11 @@ def add_data():
         messagebox.showwarning("Error", message="Please enter a valid amount.")
         return False
 
-
+    #Insert data 
     treeview.insert("", index="end", values=(Name, Receipt, Item, Amount))
 
+    #Clear data once submit button is clicked
     clear_entry_boxes()
-
-
-
-    #insert data
-    # Clear entry boxes
 
 
 
