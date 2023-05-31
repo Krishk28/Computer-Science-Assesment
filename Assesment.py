@@ -2,12 +2,12 @@ import tkinter
 from tkinter import ttk 
 from tkinter import messagebox
 
-#create window
+#creating window
 window = tkinter.Tk()
-#window title 
+#windows title 
 window.title("Julie's Party Hire")
 
-#frame
+#creating a frame inside the window for all the widgets to go inside of 
 frame = tkinter.Frame(window)
 frame.pack()
 party_hire_frame = tkinter.LabelFrame(frame, text="Julie's Party Hire", font = ("",23))
@@ -56,10 +56,10 @@ button_delete= tkinter.Button(party_hire_frame, text = "Delete Data",command=lam
 button_delete.grid(row=5,column = 2)
 
 
-#database table frame
+#creating a table frame for the treeview table 
 table_frame=tkinter.Frame(window)
 table_frame.pack(pady=10)
-#database columns 
+#defining the column names  
 columns = ("Customer Name", "Receipt Number", "Hired Item", "Amount Hired")
 treeview = ttk.Treeview(table_frame, columns=columns, show="headings")
 treeview.pack(side=tkinter.LEFT)
@@ -78,7 +78,7 @@ for col in columns:
 
 
 
-#defining the clear function 
+#defining the clear function (what it should do)
 def clear_entry_boxes():
     Customer_entry.delete(0, tkinter.END)
     Receipt_entry.delete(0, tkinter.END)
@@ -138,20 +138,20 @@ def add_data():
         messagebox.showwarning("Error", message="Please enter a valid amount.")
         return False
 
-    #Insert data 
+    #Insert data inside the table 
     treeview.insert("", index="end", values=(Name, Receipt, Item, Amount))
 
-    #Clear data once submit button is clicked
+    #run the variable "clear_data()" once submit button is clicked
     clear_entry_boxes()
 
 
 
-#Delete data
+#Delete the selected data
 def delete():
    # Get selected item to Delete
    selected_item = treeview.selection()[0]
    treeview.delete(selected_item)
 
 
-#loop  
+#loop so the code will run 
 window.mainloop()
