@@ -100,7 +100,7 @@ def add_data():
         messagebox.showwarning("Error",message="Please enter a name.")
         return
 
-    # Check if Name contains only alphabets
+    # Check if Name contains only letters
     if not Name.isalpha():
         messagebox.showwarning("Error", message="Please enter a valid name using letters only.")
         return
@@ -120,6 +120,11 @@ def add_data():
     #Check if Item is empty
     if Item == "":
         messagebox.showwarning("Error",message="Please enter an item.")
+        return
+
+        # Check if Hired Item contains only Letters
+    if not Item.isalpha():
+        messagebox.showwarning("Error", message="Please enter a valid Item using letters only.")
         return
 
     # Check if Amount is within the desired range
