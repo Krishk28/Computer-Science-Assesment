@@ -101,7 +101,7 @@ def add_data():
         return
 
     # Check if Name contains only letters
-    if not Name.isalpha():
+    if not Name.replace(" ", "").isalpha():
         messagebox.showwarning("Error", message="Please enter a valid name using letters only.")
         return
 
@@ -123,7 +123,7 @@ def add_data():
         return
 
         # Check if Hired Item contains only Letters
-    if not Item.isalpha():
+    if not Item.replace(" ", "").isalpha():
         messagebox.showwarning("Error", message="Please enter a valid Item using letters only.")
         return
 
